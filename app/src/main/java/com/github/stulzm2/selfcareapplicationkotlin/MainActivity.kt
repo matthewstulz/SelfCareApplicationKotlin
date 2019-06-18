@@ -2,10 +2,12 @@ package com.github.stulzm2.selfcareapplicationkotlin
 
 import android.content.Intent
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import androidx.recyclerview.widget.GridLayoutManager
+import com.github.stulzm2.selfcareapplicationkotlin.adapter.CategoryAdapter
+import com.github.stulzm2.selfcareapplicationkotlin.model.Category
 
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -15,6 +17,22 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar_main)
+
+        recycler_view_category.apply {
+            layoutManager = GridLayoutManager(this@MainActivity, 2)
+            adapter = CategoryAdapter(categories = listOf(
+                Category("One"),
+                Category("Two"),
+                Category("Three"),
+                Category("Four"),
+                Category("Five"),
+                Category("Six"),
+                Category("Seven"),
+                Category("Eight"),
+                Category("Nine"),
+                Category("Ten")
+            ))
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
