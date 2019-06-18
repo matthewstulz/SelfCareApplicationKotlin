@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Self Care</string>
     <string name="action_settings">Settings</string>
+
+    <string name="category">Category</string>
+    <string name="category_image">Category image</string>
 </resources>

@@ -5,11 +5,14 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import com.github.stulzm2.selfcareapplicationkotlin.adapter.CategoryAdapter
-import com.github.stulzm2.selfcareapplicationkotlin.model.Category
+import com.github.stulzm2.selfcareapplicationkotlin.viewmodel.CategoryViewModel
 
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.recycler_view_category
+import kotlinx.android.synthetic.main.activity_main.view.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,18 +23,9 @@ class MainActivity : AppCompatActivity() {
 
         recycler_view_category.apply {
             layoutManager = GridLayoutManager(this@MainActivity, 2)
-            adapter = CategoryAdapter(categories = listOf(
-                Category("One"),
-                Category("Two"),
-                Category("Three"),
-                Category("Four"),
-                Category("Five"),
-                Category("Six"),
-                Category("Seven"),
-                Category("Eight"),
-                Category("Nine"),
-                Category("Ten")
-            ))
+            recycler_view_category.hasFixedSize()
+            val categoryViewModel = ViewModelProviders.of(this@MainActivity).get(CategoryViewModel::class.java)
+            adapter = CategoryAdapter(categoryViewModel.getCategories())
         }
     }
 

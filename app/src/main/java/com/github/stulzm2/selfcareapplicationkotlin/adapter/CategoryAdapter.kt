@@ -3,6 +3,7 @@ package com.github.stulzm2.selfcareapplicationkotlin.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.github.stulzm2.selfcareapplicationkotlin.R
@@ -26,9 +27,11 @@ class CategoryAdapter(private val categories: List<Category>) : RecyclerView.Ada
     inner class CategoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private var categoryTitle: TextView? = null
+        private var categoryThumbnail: ImageView? = null
 
         init {
             categoryTitle = itemView.findViewById(R.id.text_view_category_title)
+            categoryThumbnail = itemView.findViewById(R.id.image_View_category_image)
 
             itemView.setOnClickListener { v: View ->
                 val title: String = categories[adapterPosition].title
@@ -39,6 +42,7 @@ class CategoryAdapter(private val categories: List<Category>) : RecyclerView.Ada
 
         fun bind(category: Category) {
             categoryTitle?.text = category.title
+            categoryThumbnail?.setImageResource(category.thumbnail)
         }
     }
 
