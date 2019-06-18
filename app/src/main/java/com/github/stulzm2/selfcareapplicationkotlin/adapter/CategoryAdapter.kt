@@ -8,9 +8,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.github.stulzm2.selfcareapplicationkotlin.R
 import com.github.stulzm2.selfcareapplicationkotlin.model.Category
-import com.google.android.material.snackbar.Snackbar
 
 class CategoryAdapter(private val categories: List<Category>) : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
+
+    private lateinit var categoryClickListener: CategoryAdapterOnItemClickHandler
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.card_view_category_item, parent, false)
@@ -24,7 +25,11 @@ class CategoryAdapter(private val categories: List<Category>) : RecyclerView.Ada
 
     override fun getItemCount(): Int = categories.size
 
-    inner class CategoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class CategoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
+
+        override fun onClick(v: View) {
+            categoryClickListener.onItemClick(categories[adapterPosition])
+        }
 
         private var categoryTitle: TextView? = null
         private var categoryThumbnail: ImageView? = null
@@ -33,17 +38,20 @@ class CategoryAdapter(private val categories: List<Category>) : RecyclerView.Ada
             categoryTitle = itemView.findViewById(R.id.text_view_category_title)
             categoryThumbnail = itemView.findViewById(R.id.image_View_category_image)
 
-            itemView.setOnClickListener { v: View ->
-                val title: String = categories[adapterPosition].title
-                Snackbar.make(v, "Clicked on item $title", Snackbar.LENGTH_SHORT)
-                    .setAction("Action", null).show()
-            }
         }
 
         fun bind(category: Category) {
             categoryTitle?.text = category.title
             categoryThumbnail?.setImageResource(category.thumbnail)
+            itemView.setOnClickListener(this)
         }
     }
 
+    fun setOnItemClickListener(clickListener: CategoryAdapterOnItemClickHandler) {
+        categoryClickListener = clickListener
+    }
+
+    interface CategoryAdapterOnItemClickHandler {
+        fun onItemClick(category: Category)
+    }
 }

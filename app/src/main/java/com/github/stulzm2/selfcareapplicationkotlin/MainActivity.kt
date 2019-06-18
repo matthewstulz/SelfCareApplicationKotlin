@@ -5,9 +5,11 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import com.github.stulzm2.selfcareapplicationkotlin.adapter.CategoryAdapter
+import com.github.stulzm2.selfcareapplicationkotlin.model.Category
 import com.github.stulzm2.selfcareapplicationkotlin.viewmodel.CategoryViewModel
 
 import kotlinx.android.synthetic.main.activity_main.*
@@ -26,7 +28,16 @@ class MainActivity : AppCompatActivity() {
             recycler_view_category.hasFixedSize()
             val categoryViewModel = ViewModelProviders.of(this@MainActivity).get(CategoryViewModel::class.java)
             adapter = CategoryAdapter(categoryViewModel.getCategories())
+            (adapter as CategoryAdapter).setOnItemClickListener(object : CategoryAdapter.CategoryAdapterOnItemClickHandler {
+                override fun onItemClick(category: Category) {
+                    categoryClicked(category)
+                }
+            })
         }
+    }
+
+    private fun categoryClicked(category : Category) {
+        Toast.makeText(this, "Clicked: ${category.title}", Toast.LENGTH_SHORT).show()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
