@@ -18,6 +18,8 @@ import kotlinx.android.synthetic.main.activity_main.view.*
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var categoryViewModel: CategoryViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -26,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         recycler_view_category.apply {
             layoutManager = GridLayoutManager(this@MainActivity, 2)
             recycler_view_category.hasFixedSize()
-            val categoryViewModel = ViewModelProviders.of(this@MainActivity).get(CategoryViewModel::class.java)
+            categoryViewModel = ViewModelProviders.of(this@MainActivity).get(CategoryViewModel::class.java)
             adapter = CategoryAdapter(categoryViewModel.getCategories())
             (adapter as CategoryAdapter).setOnItemClickListener(object : CategoryAdapter.CategoryAdapterOnItemClickHandler {
                 override fun onItemClick(category: Category) {
@@ -37,7 +39,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun categoryClicked(category : Category) {
-        Toast.makeText(this, "Clicked: ${category.title}", Toast.LENGTH_SHORT).show()
+        //Toast.makeText(this, "Clicked: ${category.title}", Toast.LENGTH_SHORT).show()
+
+        val intent = Intent(this@MainActivity, CategoryActivity::class.java)
+        intent.putExtra(CategoryActivity.getCategoryTitle(), category.title)
+        intent.putExtra(CategoryActivity.getCategoryString(),
+            categoryViewModel.getCategoryWebView(category))
+        startActivity(intent)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

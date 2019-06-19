@@ -9,12 +9,12 @@
     android:foreground="?selectableItemBackground">
 
     <ImageView
-            android:id="@+id/image_View_category_image"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/category_image"
-            android:scaleType="fitXY"
-            android:src="@drawable/meditation"/>
+        android:id="@+id/image_View_category_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/category_image"
+        android:scaleType="fitXY"
+        android:src="@drawable/meditation"/>
 
     <TextView
         android:id="@+id/text_view_category_title"
