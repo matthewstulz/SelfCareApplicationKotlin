@@ -3,6 +3,7 @@ package com.github.stulzm2.selfcareapplicationkotlin
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.webkit.WebView
+import androidx.core.content.res.ResourcesCompat
 
 class CategoryActivity : AppCompatActivity() {
 
@@ -24,7 +25,17 @@ class CategoryActivity : AppCompatActivity() {
 
     private fun initWebView(resource: String) {
         categoryWebView = findViewById(R.id.web_view_category)
-        categoryWebView.loadDataWithBaseURL(null, resource, "text/html", "utf-8", null)
+        if (ThemeHelper.getDarkMode()) {
+            categoryWebView.setBackgroundColor(
+                ResourcesCompat.getColor(resources, R.color.colorNightBackground, null))
+            val htmlData = "<font color='white'>$resource</font>"
+            categoryWebView.loadDataWithBaseURL(null,
+                htmlData, "text/html", "utf-8", null)
+        } else {
+            categoryWebView.loadDataWithBaseURL(
+                null,
+                resource, "text/html", "utf-8", null)
+        }
     }
 
     companion object {
