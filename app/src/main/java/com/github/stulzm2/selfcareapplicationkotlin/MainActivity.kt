@@ -63,6 +63,10 @@ class MainActivity : AppCompatActivity() {
                 startActivity(Intent(this, SettingsActivity::class.java))
                 true
             }
+            R.id.action_journal -> {
+                startActivity(Intent(this, JournalActivity::class.java))
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }

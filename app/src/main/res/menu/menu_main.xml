@@ -2,6 +2,12 @@
       xmlns:app="http://schemas.android.com/apk/res-auto"
       xmlns:tools="http://schemas.android.com/tools"
       tools:context="com.github.stulzm2.selfcareapplicationkotlin.MainActivity">
+
+    <item android:id="@+id/action_journal"
+          android:title="@string/journal"
+          android:icon="@drawable/ic_book_24dp"
+          app:showAsAction="ifRoom"/>
+
     <item android:id="@+id/action_settings"
           android:title="@string/action_settings"
           android:orderInCategory="100"
