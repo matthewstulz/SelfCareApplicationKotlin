@@ -5,10 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.github.stulzm2.selfcareapplicationkotlin.R
 import com.github.stulzm2.selfcareapplicationkotlin.database.DateConverter
 import com.github.stulzm2.selfcareapplicationkotlin.model.Journal
+
+
 
 class JournalAdapter internal constructor(
     context: Context
@@ -20,6 +23,7 @@ class JournalAdapter internal constructor(
     inner class JournalViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val journalDateItemView: TextView = itemView.findViewById(R.id.text_view_journal_date)
         val journalEntryItemView: TextView = itemView.findViewById(R.id.text_view_journal_entry)
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): JournalViewHolder {
@@ -31,6 +35,12 @@ class JournalAdapter internal constructor(
         val current = journals[position]
         holder.journalDateItemView.text = DateConverter.getDateFormat().format(current.date)
         holder.journalEntryItemView.text = current.entry
+
+        // Test to see if autoIncrement on id's were working
+        val id = current.id
+        holder.itemView.setOnClickListener { view ->
+            Toast.makeText(view.context, id.toString(), Toast.LENGTH_LONG).show()
+        }
     }
 
     internal fun setJournals(journals: List<Journal>) {

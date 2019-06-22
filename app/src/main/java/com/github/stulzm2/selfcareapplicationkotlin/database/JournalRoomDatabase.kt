@@ -54,9 +54,9 @@ abstract class JournalRoomDatabase : RoomDatabase() {
         suspend fun populateDatabase(journalDao: JournalDao) {
             journalDao.deleteAll()
             val date = Calendar.getInstance().time
-            var journal = Journal(0, "TEST", date)
+            var journal = Journal("TEST", date)
             journalDao.insert(journal)
-            journal = Journal(1, "TEST2", date)
+            journal = Journal("TEST2", date)
             journalDao.insert(journal)
         }
     }

@@ -1,17 +1,21 @@
 package com.github.stulzm2.selfcareapplicationkotlin
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.stulzm2.selfcareapplicationkotlin.adapter.JournalAdapter
+import com.github.stulzm2.selfcareapplicationkotlin.model.Journal
 import com.github.stulzm2.selfcareapplicationkotlin.viewmodel.JournalViewModel
 import kotlinx.android.synthetic.main.activity_journal.*
+import java.util.*
 
 class JournalActivity : AppCompatActivity() {
 
@@ -36,6 +40,25 @@ class JournalActivity : AppCompatActivity() {
         })
     }
 
+    companion object {
+        const val newJournalActivityRequestCode = 1
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        val date = Calendar.getInstance().time
+
+        if (requestCode == newJournalActivityRequestCode && resultCode == Activity.RESULT_OK) {
+            data?.let {
+                val journal = Journal(it.getStringExtra(AddEditJournalActivity.EXTRA_REPLY), date)
+                journalViewModel.insert(journal)
+            }
+        } else {
+            Toast.makeText(applicationContext, R.string.empty_not_saved, Toast.LENGTH_SHORT).show()
+        }
+    }
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu_journal, menu)
@@ -47,6 +70,11 @@ class JournalActivity : AppCompatActivity() {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
+            R.id.action_new_journal -> {
+                val intent = Intent(this, AddEditJournalActivity::class.java)
+                startActivityForResult(intent, newJournalActivityRequestCode)
+                true
+            }
             R.id.action_settings -> {
                 startActivity(Intent(this, SettingsActivity::class.java))
                 true
