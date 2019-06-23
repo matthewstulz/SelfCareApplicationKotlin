@@ -38,10 +38,17 @@ class JournalActivity : AppCompatActivity() {
         journalViewModel.allJournals.observe(this, Observer { journals ->
             journals?.let { adapter.setJournals(it) }
         })
+
+        adapter.setOnItemClickListener(object : JournalAdapter.JournalAdapterOnItemClickHandler {
+            override fun onItemClick(journal: Journal) {
+                Toast.makeText(this@JournalActivity, journal.id.toString(), Toast.LENGTH_LONG).show()
+            }
+        })
     }
 
     companion object {
         const val newJournalActivityRequestCode = 1
+        const val editJournalAcitivityRequestCode = 2
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -51,8 +58,9 @@ class JournalActivity : AppCompatActivity() {
 
         if (requestCode == newJournalActivityRequestCode && resultCode == Activity.RESULT_OK) {
             data?.let {
-                val journal = Journal(it.getStringExtra(AddEditJournalActivity.EXTRA_REPLY), date)
+                val journal = Journal(it.getStringExtra(AddEditJournalActivity.ADD_JOURNAL_REQUEST), date)
                 journalViewModel.insert(journal)
+                Toast.makeText(applicationContext, R.string.journal_saved, Toast.LENGTH_SHORT).show()
             }
         } else {
             Toast.makeText(applicationContext, R.string.empty_not_saved, Toast.LENGTH_SHORT).show()

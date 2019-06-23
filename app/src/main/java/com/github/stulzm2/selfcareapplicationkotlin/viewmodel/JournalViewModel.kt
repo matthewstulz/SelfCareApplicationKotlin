@@ -24,4 +24,8 @@ class JournalViewModel(application: Application) : AndroidViewModel(application)
     fun insert(journal: Journal) = viewModelScope.launch(Dispatchers.IO) {
         repository.insert(journal)
     }
+
+    fun update(journal: Journal) = viewModelScope.launch(Dispatchers.IO) {
+        repository.update(journal)
+    }
 }

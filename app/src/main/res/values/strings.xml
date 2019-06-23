@@ -13,6 +13,7 @@
     <string name="button_save">Save</string>
     <string name="empty_not_saved">Journal entry not saved because it is empty.</string>
     <string name="clear_all_journals">Clear all journals</string>
+    <string name="journal_saved">Saved</string>
 
     <string name="meditation_data">
         <![CDATA[

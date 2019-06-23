@@ -13,4 +13,9 @@ class JournalRepository(private val journalDao: JournalDao) {
     suspend fun insert(journal: Journal) {
         journalDao.insert(journal)
     }
+
+    @WorkerThread
+    suspend fun update(journal: Journal) {
+        journalDao.update(journal)
+    }
 }

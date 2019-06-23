@@ -17,4 +17,7 @@ data class Journal(
 )
 {
     constructor(entry: String = "", date: Date = Date()) : this(0, entry, date)
+
+//    @Ignore
+//    constructor(id: Int, entry: String, date: Date) : this(id, entry, date)
 }

@@ -33,14 +33,16 @@ class AddEditJournalActivity : AppCompatActivity() {
             setResult(Activity.RESULT_CANCELED, replyIntent)
         } else {
             val entry = editTextJournalEntry.text.toString()
-            replyIntent.putExtra(EXTRA_REPLY, entry)
+            replyIntent.putExtra(ADD_JOURNAL_REQUEST, entry)
             setResult(Activity.RESULT_OK, replyIntent)
         }
         finish()
     }
 
     companion object {
-        const val EXTRA_REPLY = "com.github.stulzm2.selfcareapplicationkotlin.EXTRA_REPLY"
+        const val ADD_JOURNAL_REQUEST = "com.github.stulzm2.selfcareapplicationkotlin.ADD_JOURNAL_REQUEST"
+        const val EDIT_JOURNAL_REQUEST = "com.github.stulzm2.selfcareapplicationkotlin.EDIT_JOURNAL_REQUEST"
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
