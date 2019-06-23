@@ -1,23 +1,17 @@
 package com.github.stulzm2.selfcareapplicationkotlin.model
 
+import androidx.annotation.NonNull
 import androidx.room.*
 import com.github.stulzm2.selfcareapplicationkotlin.database.DateConverter
 import java.util.*
 import androidx.room.TypeConverters
 import androidx.room.PrimaryKey
 
-
 @Entity(tableName = "journal_table")
 data class Journal(
-    @PrimaryKey(autoGenerate = true)
+    @NonNull @PrimaryKey(autoGenerate = true)
     var id: Int,
-    @ColumnInfo(name = "journal_entry") val entry: String,
+    var entry: String,
     @TypeConverters(DateConverter::class)
-    @ColumnInfo(name = "journal_date") val date: Date
+    var date: Date
 )
-{
-    constructor(entry: String = "", date: Date = Date()) : this(0, entry, date)
-
-//    @Ignore
-//    constructor(id: Int, entry: String, date: Date) : this(id, entry, date)
-}

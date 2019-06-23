@@ -8,21 +8,33 @@ import android.text.TextUtils
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.EditText
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_add_edit_journal.*
 
 class AddEditJournalActivity : AppCompatActivity() {
 
     private lateinit var editTextJournalEntry: EditText
+    private var extras: Bundle? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_edit_journal)
         setSupportActionBar(toolbar_add_edit_journal)
 
-        supportActionBar?.setTitle(R.string.new_journal)
-
         editTextJournalEntry = findViewById(R.id.edit_text_add_edit_journal)
+        extras = intent.extras
 
+        if (extras != null) {
+            val journalEntry = extras!!.getString(JournalActivity.EXTRA_DATA_UPDATE_JOURNAL, "")
+            if (journalEntry.isNotEmpty()) {
+                supportActionBar?.setTitle(R.string.edit_journal)
+                editTextJournalEntry.setText(journalEntry)
+            }
+        } else {
+            supportActionBar?.setTitle(R.string.new_journal)
+        }
+
+        editTextJournalEntry.requestFocus()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
     }
@@ -33,16 +45,21 @@ class AddEditJournalActivity : AppCompatActivity() {
             setResult(Activity.RESULT_CANCELED, replyIntent)
         } else {
             val entry = editTextJournalEntry.text.toString()
-            replyIntent.putExtra(ADD_JOURNAL_REQUEST, entry)
+            replyIntent.putExtra(EXTRA_REPLY, entry)
+            if (extras != null && extras!!.containsKey(JournalActivity.EXTRA_DATA_ID)) {
+                val id = extras!!.getInt(JournalActivity.EXTRA_DATA_ID, -1)
+                if (id != -1) {
+                    replyIntent.putExtra(EXTRA_REPLY_ID, id)
+                }
+            }
             setResult(Activity.RESULT_OK, replyIntent)
         }
         finish()
     }
 
     companion object {
-        const val ADD_JOURNAL_REQUEST = "com.github.stulzm2.selfcareapplicationkotlin.ADD_JOURNAL_REQUEST"
-        const val EDIT_JOURNAL_REQUEST = "com.github.stulzm2.selfcareapplicationkotlin.EDIT_JOURNAL_REQUEST"
-
+        const val EXTRA_REPLY = "com.github.stulzm2.selfcareapplicationkotlin.EXTRA_REPLY"
+        const val EXTRA_REPLY_ID = "com.github.stulzm2.selfcareapplicationkotlin.EXTRA_REPLY_ID"
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

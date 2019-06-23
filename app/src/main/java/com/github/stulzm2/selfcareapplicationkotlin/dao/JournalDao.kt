@@ -17,5 +17,5 @@ interface JournalDao {
     fun deleteAll()
 
     @Update
-    fun update(journal: Journal)
+    suspend fun update(journal: Journal)
 }

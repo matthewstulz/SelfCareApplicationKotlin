@@ -11,9 +11,12 @@
     <string name="new_journal">New Journal</string>
     <string name="hint_journal">Journal entry…</string>
     <string name="button_save">Save</string>
-    <string name="empty_not_saved">Journal entry not saved because it is empty.</string>
+    <string name="journal_not_updated">Journal entry not updated.</string>
+    <string name="journal_empty">Journal empty</string>
     <string name="clear_all_journals">Clear all journals</string>
-    <string name="journal_saved">Saved</string>
+    <string name="journal_saved">Journal entry saved</string>
+    <string name="journal_updated">Journal entry updated</string>
+    <string name="edit_journal">Edit Journal</string>
 
     <string name="meditation_data">
         <![CDATA[

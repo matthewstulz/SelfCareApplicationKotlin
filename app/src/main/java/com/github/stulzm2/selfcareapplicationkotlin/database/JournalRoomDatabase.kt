@@ -42,8 +42,8 @@ abstract class JournalRoomDatabase : RoomDatabase() {
 
         private class JournalDatabaseCallback(private val scope: CoroutineScope) : RoomDatabase.Callback() {
 
-            override fun onOpen(db: SupportSQLiteDatabase) {
-                super.onOpen(db)
+            override fun onCreate(db: SupportSQLiteDatabase) {
+                super.onCreate(db)
                 INSTANCE?.let { database ->
                     scope.launch(Dispatchers.IO) {
                         populateDatabase(database.journalDao())
@@ -53,9 +53,8 @@ abstract class JournalRoomDatabase : RoomDatabase() {
         }
 
         suspend fun populateDatabase(journalDao: JournalDao) {
-//            journalDao.deleteAll()
             val date = Calendar.getInstance().time
-            val journal = Journal("Welcome to the Self Care Journal. Simply swipe left or right " +
+            val journal = Journal(0, "Welcome to the Self Care Journal. Simply swipe left or right " +
                     "on an entry to delete. Click on an entry to view or edit the post. All entries are " +
                     "stored locally on your phone so every entry is safe and sound.", date)
             journalDao.insert(journal)

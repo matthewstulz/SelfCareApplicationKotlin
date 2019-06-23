@@ -28,4 +28,8 @@ class JournalViewModel(application: Application) : AndroidViewModel(application)
     fun update(journal: Journal) = viewModelScope.launch(Dispatchers.IO) {
         repository.update(journal)
     }
+
+    fun deleteAll() = viewModelScope.launch(Dispatchers.IO) {
+        repository.deleteAll()
+    }
 }

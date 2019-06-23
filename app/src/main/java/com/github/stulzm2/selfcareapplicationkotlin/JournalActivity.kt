@@ -41,14 +41,23 @@ class JournalActivity : AppCompatActivity() {
 
         adapter.setOnItemClickListener(object : JournalAdapter.JournalAdapterOnItemClickHandler {
             override fun onItemClick(journal: Journal) {
-                Toast.makeText(this@JournalActivity, journal.id.toString(), Toast.LENGTH_LONG).show()
+                launchUpdateJournalActivity(journal)
             }
         })
     }
 
     companion object {
         const val newJournalActivityRequestCode = 1
-        const val editJournalAcitivityRequestCode = 2
+        const val editJournalActivityRequestCode = 2
+        const val EXTRA_DATA_UPDATE_JOURNAL = "com.github.stulzm2.selfcareapplicationkotlin.EXTRA_DATA_UPDATE_JOURNAL"
+        const val EXTRA_DATA_ID = "com.github.stulzm2.selfcareapplicationkotlin.EXTRA_DATA_ID"
+    }
+
+    fun launchUpdateJournalActivity(journal: Journal) {
+        val intent = Intent(this, AddEditJournalActivity::class.java)
+        intent.putExtra(EXTRA_DATA_ID, journal.id)
+        intent.putExtra(EXTRA_DATA_UPDATE_JOURNAL, journal.entry)
+        startActivityForResult(intent, editJournalActivityRequestCode)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -58,12 +67,25 @@ class JournalActivity : AppCompatActivity() {
 
         if (requestCode == newJournalActivityRequestCode && resultCode == Activity.RESULT_OK) {
             data?.let {
-                val journal = Journal(it.getStringExtra(AddEditJournalActivity.ADD_JOURNAL_REQUEST), date)
+                val journal = Journal(0, it.getStringExtra(AddEditJournalActivity.EXTRA_REPLY), date)
                 journalViewModel.insert(journal)
                 Toast.makeText(applicationContext, R.string.journal_saved, Toast.LENGTH_SHORT).show()
             }
+        } else if (requestCode == newJournalActivityRequestCode && resultCode == Activity.RESULT_CANCELED) {
+            Toast.makeText(applicationContext, R.string.journal_empty, Toast.LENGTH_SHORT).show()
+        } else if (requestCode == editJournalActivityRequestCode && resultCode == Activity.RESULT_OK) {
+            data?.let {
+                val id = it.getIntExtra(AddEditJournalActivity.EXTRA_REPLY_ID, -1)
+                val entry = it.getStringExtra(AddEditJournalActivity.EXTRA_REPLY)
+
+                if (id != -1) {
+                    val journal = Journal(id, entry, date)
+                    journalViewModel.update(journal)
+                    Toast.makeText(applicationContext, R.string.journal_updated, Toast.LENGTH_SHORT).show()
+                }
+            }
         } else {
-            Toast.makeText(applicationContext, R.string.empty_not_saved, Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, R.string.journal_not_updated, Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -81,6 +103,10 @@ class JournalActivity : AppCompatActivity() {
             R.id.action_new_journal -> {
                 val intent = Intent(this, AddEditJournalActivity::class.java)
                 startActivityForResult(intent, newJournalActivityRequestCode)
+                true
+            }
+            R.id.action_clear_data -> {
+                journalViewModel.deleteAll()
                 true
             }
             R.id.action_settings -> {
