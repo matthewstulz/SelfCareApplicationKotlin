@@ -50,14 +50,6 @@ class JournalAdapter internal constructor(context: Context
     override fun onBindViewHolder(holder: JournalViewHolder, position: Int) {
         val journal: Journal = journals[position]
         holder.bind(journal)
-//        holder.journalDateItemView.text = DateConverter.getDateFormat().format(journal.date)
-//        holder.journalEntryItemView.text = journal.entry
-
-        // Test to see if autoIncrement on id's were working
-//        val id = current.id
-//        holder.itemView.setOnClickListener { view ->
-//            Toast.makeText(view.context, id.toString(), Toast.LENGTH_LONG).show()
-//        }
     }
 
     internal fun setJournals(journals: List<Journal>) {
@@ -66,6 +58,10 @@ class JournalAdapter internal constructor(context: Context
     }
 
     override fun getItemCount() = journals.size
+
+    fun getJournalAtPosition(position: Int) : Journal {
+        return journals[position]
+    }
 
     fun setOnItemClickListener(clickListener: JournalAdapterOnItemClickHandler) {
         journalClickListener = clickListener

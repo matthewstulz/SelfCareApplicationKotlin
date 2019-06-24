@@ -13,9 +13,12 @@ interface JournalDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(journal: Journal)
 
+    @Update
+    suspend fun update(journal: Journal)
+
     @Query("Delete FROM journal_table")
     fun deleteAll()
 
-    @Update
-    suspend fun update(journal: Journal)
+    @Delete
+    suspend fun delete(journal: Journal)
 }

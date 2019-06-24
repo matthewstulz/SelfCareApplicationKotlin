@@ -23,4 +23,9 @@ class JournalRepository(private val journalDao: JournalDao) {
     fun deleteAll() {
         journalDao.deleteAll()
     }
+
+    @WorkerThread
+    suspend fun delete(journal: Journal) {
+        journalDao.delete(journal)
+    }
 }

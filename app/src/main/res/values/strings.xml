@@ -17,6 +17,7 @@
     <string name="journal_saved">Journal entry saved</string>
     <string name="journal_updated">Journal entry updated</string>
     <string name="edit_journal">Edit Journal</string>
+    <string name="delete_journal">Journal entry deleted</string>
 
     <string name="meditation_data">
         <![CDATA[

@@ -16,6 +16,9 @@ import com.github.stulzm2.selfcareapplicationkotlin.model.Journal
 import com.github.stulzm2.selfcareapplicationkotlin.viewmodel.JournalViewModel
 import kotlinx.android.synthetic.main.activity_journal.*
 import java.util.*
+import androidx.recyclerview.widget.ItemTouchHelper
+
+
 
 class JournalActivity : AppCompatActivity() {
 
@@ -38,6 +41,27 @@ class JournalActivity : AppCompatActivity() {
         journalViewModel.allJournals.observe(this, Observer { journals ->
             journals?.let { adapter.setJournals(it) }
         })
+
+        val helper = ItemTouchHelper(
+            object : ItemTouchHelper.SimpleCallback(0,
+                ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
+            ) {
+                override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder,
+                    target: RecyclerView.ViewHolder): Boolean {
+                    return false
+                }
+
+                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                    val position = viewHolder.adapterPosition
+                    val journal = adapter.getJournalAtPosition(position)
+                    Toast.makeText(this@JournalActivity, R.string.delete_journal, Toast.LENGTH_SHORT).show()
+
+                    // Delete the word
+                    journalViewModel.delete(journal)
+                }
+            })
+
+        helper.attachToRecyclerView(recyclerView)
 
         adapter.setOnItemClickListener(object : JournalAdapter.JournalAdapterOnItemClickHandler {
             override fun onItemClick(journal: Journal) {
