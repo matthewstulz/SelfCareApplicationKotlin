@@ -19,6 +19,8 @@
     <string name="edit_journal">Edit Journal</string>
     <string name="delete_journal">Journal entry deleted</string>
 
+    <string name="resources">Resources</string>
+
     <string name="meditation_data">
         <![CDATA[
         <h1>What is Mindfulness Meditation?</h1>
@@ -286,26 +288,26 @@
         so these resources are just some of the places that I have benefited from personally.</p>
         <h2>Blogs & Websites</h2>
         <ul>
-        <li><a href="http://www.morningcoffeewithdee.com/">Morning Coffee With Dee</a></li>
-        <li><a href="https://www.mindbodygreen.com/">mindbodygreen ran by Jasin and Colleen</a></li>
+        <li><a href="http://www.morningcoffeewithdee.com/"><font color="7F7F7F">Morning Coffee With Dee</font></a></li>
+        <li><a href="https://www.mindbodygreen.com/"><font color="7F7F7F">mindbodygreen ran by Jasin and Colleen
+        </font></a></li>
         </ul>
         <h2>Podcasts</h2>
         <ul>
-        <li><a href="https://positivehead.com/spread-the-positivity/category/podcasts/">The Positive
-        Head Podcast hosted by Brandon Beachum</a></li>
+        <li><a href="https://positivehead.com/spread-the-positivity/category/podcasts/"><font color="7F7F7F">The
+        Positive Head Podcast hosted by Brandon Beachum</font></a></li>
         </ul>
         <h2>Books</h2>
         <p>The following books all have audiobooks available.
         <ul>
-        <li><a href="https://www.amazon.com/Secret-Rhonda-Byrne/dp/1582701709/">The Secret by
-        Rhonda Byrne</a></li>
-        <li><a href="https://www.amazon.com/Power-Secret-Rhonda-Byrne/dp/1439181780/">The Power by
-        Rhonda Byrne</a>
-        </li>
-        <li><a href="https://www.amazon.com/Power-Now-Guide-Spiritual-Enlightenment/dp/1577314808">
-        The Power of Now: A Guide to Spiritual Enlightenment by Eckhart Tolle</a></li>
-        <li><a href="https://www.amazon.com/New-Earth-Awakening-Purpose-Selection/dp/0452289963">A
-        New Earth by Eckhart Tolle</a></li>
+        <li><a href="https://www.amazon.com/Secret-Rhonda-Byrne/dp/1582701709/"><font color="7F7F7F">The Secret by
+        Rhonda Byrne</font></a></li>
+        <li><a href="https://www.amazon.com/Power-Secret-Rhonda-Byrne/dp/1439181780/"><font color="7F7F7F">The Power by
+        Rhonda Byrne</font></a></li>
+        <li><a href="https://www.amazon.com/Power-Now-Guide-Spiritual-Enlightenment/dp/1577314808"><font color="7F7F7F">
+        The Power of Now: A Guide to Spiritual Enlightenment by Eckhart Tolle</font></a></li>
+        <li><a href="https://www.amazon.com/New-Earth-Awakening-Purpose-Selection/dp/0452289963"><font color="7F7F7F">
+        A New Earth by Eckhart Tolle</font></a></a></li>
         </ul>
         ]]>
     </string>

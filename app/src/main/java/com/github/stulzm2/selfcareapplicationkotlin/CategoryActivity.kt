@@ -42,18 +42,6 @@ class CategoryActivity : AppCompatActivity() {
                 null,
                 resource, "text/html", "utf-8", null)
         }
-
-//        if (ThemeHelper.getDarkMode()) {
-//            categoryWebView.setBackgroundColor(
-//                ResourcesCompat.getColor(resources, R.color.colorNightBackground, null))
-//            val htmlData = "<font color='white'>$resource</font>"
-//            categoryWebView.loadDataWithBaseURL(null,
-//                htmlData, "text/html", "utf-8", null)
-//        } else {
-//            categoryWebView.loadDataWithBaseURL(
-//                null,
-//                resource, "text/html", "utf-8", null)
-//        }
     }
 
     companion object {
