@@ -6,6 +6,14 @@ A Kotlin implementation of the Self Care Application.
 <img src="screenshots/EditJournal.png" width="200" /><img src="screenshots/SettingsTheme.png" width="200" />
 <img src="screenshots/LightCategory.png" width="200" /><img src="screenshots/Resources.png" width="200" />
 
+### Upcoming Features and Improvements
+
+- [ ] Change the view journal acitivty to load the entry into a textView with an option to edit
+- [ ] Add markdown support
+- [ ] Continue implementing features in settings such as font, font size, etc
+- [ ] Implement an undo Snackbar on swipe deletion of journal entry
+- [ ] Animate the cardView of a journal entry on swipe deletion such as changing to a red color or adding a color/icon behind the card
+
 # License
 Copyright 2019 Matthew Stulz
 
